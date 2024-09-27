@@ -10,9 +10,9 @@
 <center>
 <h1>Jonnan yritys Oy Ab</h1>
 
-<button id="yritysesittely" onclick="esittely()">Yritysesittely</button>
-<button>Yhteystiedot</button>
-<button>Henkilöstö</button>
+<button id="b1" onclick="esittely()">Yritysesittely</button>
+<button id="b2" onclick="yhteystiedot()">Yhteystiedot</button>
+<button id="b3" onclick="fetchData()">Henkilöstö</button>
 
 <div id="yleista">
 <h3>IT-ratkaisuja jokaiselle.</h3>
@@ -32,9 +32,35 @@ function esittely() {
     document.getElementById("main_alue").innerHTML = "<p> Yritys on perustettu vuonna 2024. Sen perustajana ja nykyisenä toimitusjohtajana toimii Jonna Wiro. </p>"
 }
 
-fetch("http://localhost:3000/api/henkilosto")
-.then(res => res.json())
-.then(js => console.log(js))
+function yhteystiedot() {
+    document.getElementById("main_alue").innerHTML = "<p> Käyntiosoite: Pitkäkuja 2, 29630 Pomarkku </p>"
+}
+
+async function fetchData() {
+    document.getElementById("main_alue").innerHTML = "<h2>Henkilöstö</h2>"
+
+    var x = `<table><thead><th>Titteli</th><th>Nimi</th><th>Sähköpostiosoite</th></thead><tbody>`
+
+    try {
+        const response = await fetch("http://localhost:3000/api/henkilosto")
+
+        const henkilodata = await response.json() // muutetaan json => javascript muotoon
+
+        await henkilodata.map(h => { //Loopataan läpi oliot map funktiolla, h on 1 henkilo-olio
+        x += `<tr><td>${h.titteli}</td><td>${h.nimi}</td><td>${h.sahkoposti}</td></tr>`
+        })
+
+        // taulukko päätetään ja rederöidään html elementtiin
+        x += `</tbody></table>`
+        document.getElementById("main_alue").innerHTML = x
+
+    //Virhetilanteen hallinta
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+
+    // fetchData()
+}
 
 </script>
 
