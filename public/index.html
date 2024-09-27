@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Jonnan yritys Oy Ab</title>
+</head>
+
+<body>
+<center>
+<h1>Jonnan yritys Oy Ab</h1>
+
+<button id="yritysesittely" onclick="esittely()">Yritysesittely</button>
+<button>Yhteystiedot</button>
+<button>Henkilöstö</button>
+
+<div id="yleista">
+<h3>IT-ratkaisuja jokaiselle.</h3>
+<h4>Otathan yhteyttä, niin voimme keskustalla lisää.</h4>
+
+</div>
+
+
+<div id="main_alue"></div>
+
+
+</center>
+
+<script>
+
+function esittely() {
+    document.getElementById("main_alue").innerHTML = "<p> Yritys on perustettu vuonna 2024. Sen perustajana ja nykyisenä toimitusjohtajana toimii Jonna Wiro. </p>"
+}
+
+fetch("http://localhost:3000/api/henkilosto")
+.then(res => res.json())
+.then(js => console.log(js))
+
+</script>
+
+
+</body>
+</html>
