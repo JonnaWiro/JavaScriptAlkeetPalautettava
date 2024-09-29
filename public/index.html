@@ -4,6 +4,7 @@
 
 <head>
     <title>Jonnan yritys Oy Ab</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 
 <body>
@@ -16,7 +17,7 @@
 
 <div id="yleista">
 <h3>IT-ratkaisuja jokaiselle.</h3>
-<h4>Otathan yhteyttä, niin voimme keskustalla lisää.</h4>
+<h4>Otathan yhteyttä, niin voimme keskustella lisää.</h4>
 
 </div>
 
@@ -39,7 +40,7 @@ function yhteystiedot() {
 async function fetchData() {
     document.getElementById("main_alue").innerHTML = "<h2>Henkilöstö</h2>"
 
-    var x = `<table><thead><th>Titteli</th><th>Nimi</th><th>Sähköpostiosoite</th></thead><tbody>`
+    var x = `<table id="taulukko"><thead><th>Titteli</th><th>Nimi</th><th>Sähköpostiosoite</th></thead><tbody>`
 
     try {
         const response = await fetch("http://localhost:3000/api/henkilosto")
